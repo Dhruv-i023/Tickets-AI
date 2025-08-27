@@ -9,10 +9,10 @@ function CheckAuth({ children, protectedRoute }) {
     const token = localStorage.getItem("token");
 
     if (protectedRoute) {
-      if (!token) {
-        navigate("/login");
-        return;
-      }
+      // if (!token) {
+      //   navigate("/login");
+      //   return;
+      // }
 
       // ✅ Validate token with backend
       fetch("http://localhost:3000/api/auth/validate", {
@@ -34,11 +34,8 @@ function CheckAuth({ children, protectedRoute }) {
           navigate("/login");
         });
     } else {
-      if (token) {
-        navigate("/");
-      } else {
-        setLoading(false);
-      }
+      // Public route → no redirect
+      setLoading(false);
     }
   }, [navigate, protectedRoute]);
 

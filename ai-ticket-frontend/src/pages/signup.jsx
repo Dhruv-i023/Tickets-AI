@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function SignupPage() {
-  const [form, setForm] = useState({ email: "", password: "" });
+  const [form, setForm] = useState({ username: "", email: "", password: "" });
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
@@ -30,9 +30,10 @@ export default function SignupPage() {
       if (res.ok) {
         localStorage.setItem("token", data.token);
         localStorage.setItem("user", JSON.stringify(data.user));
-        navigate("/");
+        navigate("/login");
       } else {
-        alert(data.message || "Signup failed");
+        console.log(data)
+        // alert(data.message || "Signup failed");
       }
     } catch (err) {
       alert("Something went wrong");
@@ -43,26 +44,37 @@ export default function SignupPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-base-200">
-      <div className="card w-full max-w-sm shadow-xl bg-base-100">
-        <form onSubmit={handleSignup} className="card-body">
-          <h2 className="card-title justify-center">Sign Up</h2>
+  <div className="min-h-screen flex overflow-hidden">
+    {/* Left Side - AI Image */}
+    <div className="hidden lg:flex w-1/2">
+      <img
+        src="../../public/signup.jpg"
+        alt="AI Illustration"
+        className="w-full h-200 object-cover"
+      />
+    </div>
 
-          {/* <input
+    {/* Right Side - Signup Form */}
+    <div className="flex w-full lg:w-1/2 items-center justify-center bg-base-200">
+      <div className="card w-full max-w-md shadow-xl bg-base-100 p-6">
+        <form onSubmit={handleSignup} className="card-body">
+          <h2 className="text-2xl font-bold text-center mb-4">Create an Account</h2>
+
+          <input
             type="text"
             name="username"
             placeholder="Username"
-            className="input input-bordered"
+            className="input input-bordered w-full"
             value={form.username}
             onChange={handleChange}
             required
-          /> */}
+          />
 
           <input
             type="email"
             name="email"
             placeholder="Email"
-            className="input input-bordered"
+            className="input input-bordered w-full"
             value={form.email}
             onChange={handleChange}
             required
@@ -72,13 +84,13 @@ export default function SignupPage() {
             type="password"
             name="password"
             placeholder="Password"
-            className="input input-bordered"
+            className="input input-bordered w-full"
             value={form.password}
             onChange={handleChange}
             required
           />
 
-          <div className="form-control mt-4">
+          <div className="form-control mt-6">
             <button
               type="submit"
               className="btn btn-primary w-full"
@@ -87,8 +99,17 @@ export default function SignupPage() {
               {loading ? "Signing up..." : "Sign Up"}
             </button>
           </div>
+
+          <p className="text-sm text-center mt-4">
+            Already have an account?{" "}
+            <a href="/login" className="text-primary font-semibold hover:underline">
+              Log in
+            </a>
+          </p>
         </form>
       </div>
     </div>
-  );
+  </div>
+);
+
 }

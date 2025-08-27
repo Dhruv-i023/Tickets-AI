@@ -5,10 +5,17 @@ import User from "../models/user.js";
 import { inngest } from "../inngest/client.js";
 
 export const signup = async (req, res) => {
-  const { email, password, skills = [] } = req.body;
+  const { username, email, password, skills = [] } = req.body;
+  if (!username || !email || !password) {
+    return res.status(400).json({ message: "All fields are required" });
+  }
+  const existingUser = await User.findOne({ $or: [{ email }, { username }] });
+  if (existingUser) {
+    return res.status(400).json({ message: "Email or Username already taken" });
+  }
   try {
     const hashed = await bcrypt.hash(password, 10);
-    const user = await User.create({ email, password: hashed, skills });
+    const user = await User.create({ username, email, password: hashed, skills });
 
     //Fire inngest event
 

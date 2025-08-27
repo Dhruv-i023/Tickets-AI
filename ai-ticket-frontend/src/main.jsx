@@ -8,19 +8,21 @@ import TicketDetailsPage from "./pages/ticket.jsx";
 import Login from "./pages/login.jsx";
 import Signup from "./pages/signup.jsx";
 import Admin from "./pages/admin.jsx";
+import LandingPage from "./pages/LandingPage.jsx";
 import Navbar from "./components/navbar.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <BrowserRouter>
-      <Navbar></Navbar>
+    <Navbar></Navbar>
       <Routes>
+        
         {/* Home (Tickets) */}
         <Route
           path="/"
           element={
-            <CheckAuth protectedRoute={true}>
-              <Tickets />
+            <CheckAuth protectedRoute={false}>
+              <LandingPage />
             </CheckAuth>
           }
         />

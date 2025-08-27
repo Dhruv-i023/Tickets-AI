@@ -40,42 +40,57 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-base-200">
-      <div className="card w-full max-w-sm shadow-xl bg-base-100">
-        <form onSubmit={handleLogin} className="card-body">
-          <h2 className="card-title justify-center">Login</h2>
+    <div className="min-h-screen flex overflow-hidden">
+      {/* Left Side Form */}
+      <div className="flex items-center justify-center bg-base-200 w-full lg:w-1/2">
+        <div className="card w-full max-w-md shadow-xl bg-base-100">
+          <form onSubmit={handleLogin} className="card-body">
+            <h2 className="card-title justify-center text-2xl font-bold">
+              Login
+            </h2>
 
-          <input
-            type="email"
-            name="email"
-            placeholder="Email"
-            className="input input-bordered"
-            value={form.email}
-            onChange={handleChange}
-            required
-          />
+            <input
+              type="email"
+              name="email"
+              placeholder="Email"
+              className="input input-bordered w-full"
+              value={form.email}
+              onChange={handleChange}
+              required
+            />
 
-          <input
-            type="password"
-            name="password"
-            placeholder="Password"
-            className="input input-bordered"
-            value={form.password}
-            onChange={handleChange}
-            required
-          />
+            <input
+              type="password"
+              name="password"
+              placeholder="Password"
+              className="input input-bordered w-full"
+              value={form.password}
+              onChange={handleChange}
+              required
+            />
 
-          <div className="form-control mt-4">
-            <button
-              type="submit"
-              className="btn btn-primary w-full"
-              disabled={loading}
-            >
-              {loading ? "Logging in..." : "Login"}
-            </button>
-          </div>
-        </form>
+            <div className="form-control mt-4">
+              <button
+                type="submit"
+                className="btn btn-primary w-full"
+                disabled={loading}
+              >
+                {loading ? "Logging in..." : "Login"}
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      {/* Right Side Image */}
+      <div className="hidden lg:flex w-1/2">
+        <img
+          src="/login.jpg"  // keep your image inside public/ and use absolute path
+          alt="AI Illustration"
+          className="w-full h-screen object-cover"
+        />
       </div>
     </div>
   );
+
 }
