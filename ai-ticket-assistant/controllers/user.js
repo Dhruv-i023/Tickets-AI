@@ -5,7 +5,7 @@ import User from "../models/user.js";
 import { inngest } from "../inngest/client.js";
 
 export const signup = async (req, res) => {
-  const { username, email, password, skills = [] } = req.body;
+  const { username, email, password, role, skills = [] } = req.body;
   if (!username || !email || !password) {
     return res.status(400).json({ message: "All fields are required" });
   }
@@ -15,7 +15,7 @@ export const signup = async (req, res) => {
   }
   try {
     const hashed = await bcrypt.hash(password, 10);
-    const user = await User.create({ username, email, password: hashed, skills });
+    const user = await User.create({ username, email, password: hashed, role, skills });
 
     //Fire inngest event
 

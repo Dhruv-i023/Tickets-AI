@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function SignupPage() {
-  const [form, setForm] = useState({ username: "", email: "", password: "" });
+  const [form, setForm] = useState({ username: "", email: "", password: "", role: "" });
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
@@ -90,6 +90,19 @@ export default function SignupPage() {
             required
           />
 
+          <select
+            name="role"
+            className="select select-bordered w-full"
+            value={form.role}
+            onChange={handleChange}
+            required
+            >
+            <option value="">Select Role</option>
+            <option value="user">User (Raise Tickets)</option>
+            <option value="moderator">Moderator (Solve Tickets)</option>
+          </select>
+          
+
           <div className="form-control mt-6">
             <button
               type="submit"
@@ -99,6 +112,7 @@ export default function SignupPage() {
               {loading ? "Signing up..." : "Sign Up"}
             </button>
           </div>
+
 
           <p className="text-sm text-center mt-4">
             Already have an account?{" "}

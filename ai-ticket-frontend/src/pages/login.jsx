@@ -27,7 +27,7 @@ export default function LoginPage() {
       if (res.ok) {
         localStorage.setItem("token", data.token);
         localStorage.setItem("user", JSON.stringify(data.user));
-        navigate("/");
+        navigate("/tickets");
       } else {
         alert(data.message || "Login failed");
       }

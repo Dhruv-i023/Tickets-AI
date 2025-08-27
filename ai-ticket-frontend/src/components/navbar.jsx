@@ -14,6 +14,10 @@ export default function Navbar() {
     navigate("/login");
   };
 
+  const myTickets = () => {
+    navigate("/tickets")
+  }
+
   return (
     <nav className="w-full bg-white border-b border-gray-200 shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-16">
@@ -55,6 +59,14 @@ export default function Navbar() {
                   Admin
                 </Link>
               )}
+
+              <button
+                onClick={myTickets}
+                className="px-3 py-2 text-sm font-medium text-red-600 border border-red-600 rounded-lg hover:bg-red-50 transition-colors"
+              >
+                My Tickets
+              </button>
+
               <button
                 onClick={logout}
                 className="px-3 py-2 text-sm font-medium text-red-600 border border-red-600 rounded-lg hover:bg-red-50 transition-colors"
